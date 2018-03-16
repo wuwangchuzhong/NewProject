@@ -1,0 +1,19 @@
+Glide最新升级，解决了一个比较头疼的问题，在传进去一个fragment或者是Activity时，如果还未加载图片，本身的content就已经销毁了，会造成Glide报错，之前还得
+销毁Glide加载图片的，此时已经完全没有必要，废话不说，直接上代码
+
+       GlideApp.with(this)
+                .load("http://picture1.yidianchina.com/assets/upload/product/aefbeb8339be1ac9f885ef03985ff455_white_150x150.jpg")
+                .placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.ic_launcher)
+                .into(iv_image);
+
+在此需要注意的有几点：
+     1.添加依赖后，无法找到GlideApp
+     2.确保当前的 compileSdkVersion 是 27，必须在 27下，Glide v4 才支持  
+       compile 'com.android.support:appcompat-v7:27.0.2'
+     
+     3.此时需要先添加一个类 MyAppGlideModule 继承 AppGlideModule
+     4. clean- build - 运行ok
+     5.4方法若不行，直接上 make project
+                
+                
